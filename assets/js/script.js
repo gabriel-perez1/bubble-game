@@ -17,7 +17,24 @@ function draw () {
     particleSystem[i].move();
     particleSystem[i].show();
     particleSystem[i].limit();
-  }
+
+    // changes color once particles converge
+    if (particleSystem[i].contain(vx, vy)) {
+      particleSystem[i].changeColor('yellow');
+    }
+    else {
+      particleSystem[i].changeColor('black');
+    }
+    /* another way to determine when they converge:
+    let d = dist(vx, vy, particleSystem[i].x, particleSystem[i].y);
+    if (d < 60) {
+      particleSystem[i].changeColor('yellow');
+    }
+    else {
+      particleSystem[i].changeColor('black');
+    }
+  } */
+}
   // particle that user controls
   noCursor();
   fill('red');
@@ -79,5 +96,8 @@ class particle {
     else {
       return false;
     }
+  }
+  changeColor(newColor) {
+    this.c = color (newColor);
   }
 }
