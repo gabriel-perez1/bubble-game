@@ -1,7 +1,7 @@
 let particleSystem = [];
 let particleNum = 30;
 let vx = 0, vy = 0; // user particle position
-let timer = 10; // game duration
+let timer = 25; // game duration
 
 // adds particle to array
 function setup () {

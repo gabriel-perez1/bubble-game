@@ -1,2 +1,5 @@
-# bubble-game
-simple bubble popping game developed with p5.js
+# Bubble Popping Game
+Simple bubble popping game using p5.s
+
+# How to play
+User bubble is controled by arrow keys
