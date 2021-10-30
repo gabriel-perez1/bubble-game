@@ -1,6 +1,7 @@
 let particleSystem = [];
 let particleNum = 50;
 let vx = 0, vy = 0; // user particle position
+let timer = 10; // game duration
 
 // adds particle to array
 function setup () {
@@ -18,20 +19,19 @@ function draw () {
     particleSystem[i].show();
     particleSystem[i].limit();
 
-    // changes color once particles converge
+    // deletes particle when user particle touches them
     if (particleSystem[i].contain(vx, vy)) {
-      particleSystem[i].changeColor('yellow');
+      // splice is used to modify content of array
+      particleSystem.splice(i, 1); 
     }
-    else {
-      particleSystem[i].changeColor('black');
-    }
+    
     /* another way to determine when they converge:
     let d = dist(vx, vy, particleSystem[i].x, particleSystem[i].y);
-    if (d < 60) {
-      particleSystem[i].changeColor('yellow');
+    if (d < 20) {
+      
     }
     else {
-      particleSystem[i].changeColor('black');
+    
     }
   } */
 }
@@ -52,10 +52,20 @@ function draw () {
   if (keyIsDown(UP_ARROW)) {
     vy -= 5;
   }
-
   if (keyIsDown(DOWN_ARROW)) {
     vy += 5;
   }
+  textAlign(CENTER);
+  if (frameCount%60 === 0 && timer > 0) {
+    timer --;
+  }
+  else if (timer === 0) {
+    text("Game Over", width/2, height/2);
+    let score = particleNum - particleSystem.length;
+    textSize(20);
+    text("Final Score: " + score, width/2, height/2-40);
+  }
+  text(timer, width/2, 30);
 }
 
 
@@ -90,7 +100,7 @@ class particle {
   // function that returns true if particle and vehicle position converge
   contain(x2, y2)  {
     let d = dist (x2, y2, this.x, this.y);
-    if (d < 20) { //20 is the size of the particle so if the distance is less than, they're touching
+    if (d < this.r * 2) {
       return true;
     }
     else {
