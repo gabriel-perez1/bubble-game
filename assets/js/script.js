@@ -5,7 +5,7 @@ let timer = 10; // game duration
 
 // adds particle to array
 function setup () {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < particleNum; i++) {
     let newParticle = new particle();
     particleSystem.push(newParticle);
@@ -39,7 +39,7 @@ function draw () {
   noCursor();
   fill('red');
   noStroke();
-  circle(vx, vy, 20);
+  circle(windowHeight / 2, windowWidth / 2, 20);
 
   if (keyIsDown(LEFT_ARROW)) {
     vx -= 5;
